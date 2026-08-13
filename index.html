@@ -42,10 +42,10 @@
     color: var(--ink);
     font-family: -apple-system,"SF Pro Rounded","Segoe UI",ui-rounded,system-ui,sans-serif;
     min-height:100%;
-    padding: clamp(14px,3vw,32px);
+    padding: clamp(10px,2vw,20px);
     display:flex;
     flex-direction:column;
-    gap: clamp(14px,2.4vw,22px);
+    gap: clamp(10px,1.6vw,16px);
   }
   .masthead{ text-align:center; }
   .masthead .eyebrow{
@@ -54,16 +54,16 @@
   }
   .masthead h1{
     font-family: Georgia,"Iowan Old Style","Palatino Linotype",serif;
-    font-size: clamp(1.5rem,3.4vw,2.3rem);
+    font-size: clamp(1.2rem,2.6vw,1.8rem);
     margin:0 0 4px; text-wrap:balance;
   }
-  .masthead p{ margin:0; color:var(--ink-soft); font-size:0.92rem; }
+  .masthead p{ margin:0; color:var(--ink-soft); font-size:0.84rem; }
 
   /* ================= ROOM ================= */
   .room{
     position:relative;
     container-type: inline-size;
-    aspect-ratio: 16 / 10.5;
+    aspect-ratio: 16 / 10;
     border-radius: 22px;
     overflow:hidden;
     box-shadow: 0 18px 40px -18px var(--shadow), 0 0 0 clamp(6px,1.4cqw,14px) var(--wood);
@@ -118,7 +118,7 @@
   .sign::before{ left:20%; }
   .sign::after{ right:20%; }
   .sign svg{ width: clamp(14px,2.2cqw,19px); height: clamp(14px,2.2cqw,19px); flex-shrink:0; }
-  .sign span{ font-weight:700; font-size: clamp(10px,1.6cqw,14px); }
+  .sign span{ font-weight:700; font-size: clamp(13px,2cqw,18px); }
   .sign:hover, .sign:focus-visible{ transform: rotate(0deg) scale(1.03); }
 
   /* ---- big nature window (the "back wall" view) ---- */
@@ -212,7 +212,7 @@
     position:absolute; bottom:-2.6cqw; left:50%; transform:translateX(-50%);
     background: var(--paper); color: var(--ink-paper); font-weight:700; white-space:normal;
     max-width: 13cqw; text-align:center; line-height:1.15;
-    font-size: clamp(7px,1.1cqw,10px); padding: 3px 6px; border-radius:6px;
+    font-size: clamp(10px,1.55cqw,13px); padding: 3px 7px; border-radius:6px;
     box-shadow: 0 2px 4px -2px var(--shadow); pointer-events:none;
   }
 
@@ -257,15 +257,15 @@
   }
   .teacup svg{ width:100%; height:70%; transition: transform 0.15s ease; }
   .teacup .tag{
-    font-size: clamp(9px,1.3cqw,12px); font-weight:700; color: var(--ink-paper);
-    background: var(--paper); padding: 2px 6px; border-radius:6px;
+    font-size: clamp(12px,1.9cqw,16px); font-weight:700; color: var(--ink-paper);
+    background: var(--paper); padding: 3px 8px; border-radius:6px;
     box-shadow: 0 2px 4px -2px var(--shadow); white-space:nowrap;
   }
   .teacup:hover svg, .teacup:focus-visible svg{ transform: translateY(-8%); }
 
   /* ---- calendar ---- */
   .calendar{
-    position:absolute; right:2%; top:4%; width:20%; height:12%;
+    position:absolute; right:2%; top:4%; width:20%; height:11%;
     background: var(--paper); border-radius: clamp(3px,0.8cqw,7px);
     box-shadow: 0 6px 14px -8px var(--shadow);
     text-decoration:none; color:var(--ink); overflow:hidden;
@@ -274,7 +274,7 @@
   .calendar:hover, .calendar:focus-visible{ transform: translateY(-4%); }
   .calendar .head{
     background: var(--coral); color: var(--ink-paper);
-    font-size: clamp(9px,1.4cqw,12px); font-weight:700; text-align:center;
+    font-size: clamp(12px,1.9cqw,16px); font-weight:700; text-align:center;
     padding: 7% 0 5%;
   }
   .calendar .grid{ display:grid; grid-template-columns: repeat(4,1fr); gap: 7%; padding: 9%; }
@@ -283,21 +283,21 @@
 
   /* ---- corkboard ---- */
   .corkboard{
-    position:absolute; left:66%; top:17%; width:32%; height:38%;
+    position:absolute; left:66%; top:16%; width:32%; height:44%;
     background: var(--wood);
     border-radius: clamp(3px,0.8cqw,7px);
     box-shadow: 0 8px 16px -10px var(--shadow), inset 0 0 0 clamp(3px,0.9cqw,8px) var(--wood-edge);
     display:flex; flex-wrap:wrap; align-content:flex-start; justify-content:center;
-    gap: 4%; padding: 7%;
+    gap: 3%; padding: 5% 5% 4%;
   }
   .note{
     flex: 1 1 28%; max-width:30%;
     background: var(--paper-b);
     border-radius: 3px;
-    padding: 7% 4%;
+    padding: 6% 3%;
     text-align:center;
     text-decoration:none; color:var(--ink-paper);
-    font-size: clamp(7.5px,1.05cqw,10.5px);
+    font-size: clamp(10px,1.5cqw,13.5px);
     font-weight:700; line-height:1.25;
     box-shadow: 0 4px 8px -4px rgba(0,0,0,0.3);
     position:relative;
@@ -309,20 +309,35 @@
     background: radial-gradient(circle at 35% 30%, #fff8, var(--coral-deep));
     box-shadow: 0 2px 3px -1px rgba(0,0,0,0.45);
   }
-  .note:nth-child(1){ transform: rotate(-3deg); background: var(--paper); }
-  .note:nth-child(2){ transform: rotate(2deg); }
-  .note:nth-child(3){ transform: rotate(-1.5deg); background: var(--paper-c); }
-  .note:nth-child(4){ transform: rotate(2.5deg); }
-  .note:nth-child(5){ transform: rotate(-2deg); background: var(--paper); }
-  .note:nth-child(6){ transform: rotate(1.5deg); background: var(--paper-c); }
-  .note:nth-child(7){ transform: rotate(-2.5deg); }
-  .note:nth-child(8){ transform: rotate(2deg); background: var(--paper); }
-  .note:nth-child(9){ transform: rotate(-1.5deg); background: var(--paper-c); }
+  .rot-a{ transform: rotate(-3deg); } .bg-a{ background: var(--paper); }
+  .rot-b{ transform: rotate(2.5deg); } .bg-b{ background: var(--paper-c); }
+  .rot-c{ transform: rotate(-1.5deg); } .bg-c{ background: var(--paper-b); }
   .note:hover, .note:focus-visible{ transform: translateY(-5%) rotate(0deg); }
   .note .go{ display:block; margin-top:5%; font-size:0.85em; color: var(--coral-deep); font-weight:700; }
 
+  /* Synergy — used daily, called out with its own heart badge */
+  .note-heart{
+    flex: 0 0 34%; max-width:36%; aspect-ratio: 32 / 30;
+    position:relative; display:flex; align-items:center; justify-content:center;
+    text-decoration:none; animation: heartPulse 2.6s ease-in-out infinite;
+  }
+  .note-heart svg{ position:absolute; inset:0; width:100%; height:100%; filter: drop-shadow(0 4px 6px rgba(74,51,36,0.35)); }
+  .note-heart span{
+    position:relative; z-index:1; color:var(--paper); font-weight:800;
+    font-size: clamp(12px,1.9cqw,16px); text-align:center; margin-top:-8%;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.25);
+  }
+  .note-heart::before{
+    content:""; position:absolute; top:0; left:50%; transform:translateX(-50%); z-index:2;
+    width: clamp(8px,1.7cqw,14px); height: clamp(8px,1.7cqw,14px); border-radius:50%;
+    background: radial-gradient(circle at 35% 30%, #fff8, var(--coral-deep));
+    box-shadow: 0 2px 3px -1px rgba(0,0,0,0.45);
+  }
+  .note-heart:hover, .note-heart:focus-visible{ transform: scale(1.06); }
+  @keyframes heartPulse{ 0%,100%{ transform:scale(1); } 50%{ transform:scale(1.045); } }
+
   /* ---- photos ---- */
-  .photos{ position:absolute; right:6%; top:57%; width:20%; height:12%; text-decoration:none; color:var(--ink-paper); }
+  .photos{ position:absolute; right:6%; top:62%; width:20%; height:9%; text-decoration:none; color:var(--ink-paper); }
   .photos .pic{ position:absolute; width:44%; aspect-ratio:0.86; background: var(--paper); padding: 6% 6% 16%; box-shadow: 0 6px 10px -6px var(--shadow); transition: transform 0.15s ease; }
   .photos .pic i{ display:block; width:100%; height:100%; }
   .photos .pic:nth-child(1){ left:0; top:8%; transform: rotate(-6deg); z-index:1; }
@@ -330,46 +345,54 @@
   .photos .pic:nth-child(2){ left:26%; top:0%; transform: rotate(5deg); z-index:2; }
   .photos .pic:nth-child(2) i{ background: linear-gradient(135deg, var(--coral), var(--lav)); }
   .photos .cap{
-    position:absolute; left:0; bottom:0; font-size: clamp(9px,1.3cqw,12px); font-weight:700;
-    background: var(--paper); padding: 2px 7px; border-radius:6px; box-shadow: 0 2px 4px -2px var(--shadow);
+    position:absolute; left:0; bottom:0; font-size: clamp(12px,1.9cqw,16px); font-weight:700;
+    background: var(--paper); padding: 3px 8px; border-radius:6px; box-shadow: 0 2px 4px -2px var(--shadow);
   }
   .photos:hover .pic, .photos:focus-visible .pic{ transform: rotate(0deg); }
 
   /* ---- desk ---- */
-  .desk{ position:absolute; right:2%; top:73%; width:33%; height:23%; }
+  .desk{ position:absolute; right:2%; top:76%; width:33%; height:22%; }
   .desk .top{ position:absolute; top:0; left:-4%; right:-4%; height:20%; background: var(--wood); border-radius: 3px; box-shadow: 0 4px 8px -4px var(--shadow); }
   .drawer{
     position:absolute; left:0; right:0; top:18%; bottom:0;
     background: var(--wood-edge);
     border-radius: 0 0 clamp(3px,0.8cqw,6px) clamp(3px,0.8cqw,6px);
-    text-decoration:none;
     box-shadow: inset 0 0 0 clamp(2px,0.6cqw,5px) var(--wood-deep);
     display:flex; align-items:center; justify-content:center;
-    transition: transform 0.15s ease;
   }
-  .drawer:hover, .drawer:focus-visible{ transform: translateY(2%); }
   .drawer .pull{ width:34%; height: clamp(4px,1.1cqw,8px); background: var(--paper); border-radius:6px; box-shadow: 0 0 0 clamp(2px,0.5cqw,4px) var(--wood-deep); }
-  .drawer .tag{
-    position:absolute; left:50%; bottom:10%; transform:translateX(-50%);
-    background: var(--paper); color: var(--ink-paper); font-size: clamp(10px,1.5cqw,13px); font-weight:700;
-    padding: 2px 9px; border-radius:6px; box-shadow: 0 2px 4px -2px var(--shadow);
+
+  .drive-vase{
+    position:absolute; left:4%; top:-10%; width:17%;
+    display:flex; flex-direction:column; align-items:center; justify-content:flex-end; gap:6%;
+    text-decoration:none; z-index:2; transition: transform 0.15s ease;
   }
+  .drive-vase svg{ width:100%; height:auto; aspect-ratio: 32 / 40; flex-shrink:0; }
+  .drive-vase .tag{
+    font-size: clamp(11px,1.7cqw,15px); font-weight:700; color: var(--ink-paper);
+    background: var(--paper); padding: 3px 8px; border-radius:6px;
+    box-shadow: 0 2px 4px -2px var(--shadow); white-space:nowrap;
+  }
+  .drive-vase:hover, .drive-vase:focus-visible{ transform: translateY(-6%); }
+
   .calc-launch{
-    position:absolute; right:8%; top:-16%; width:17%; aspect-ratio:0.85;
-    background: var(--paper); border: none; border-radius: clamp(3px,0.8cqw,6px);
-    box-shadow: 0 6px 10px -6px var(--shadow);
-    display:flex; flex-direction:column; align-items:center; justify-content:center; gap:8%;
-    cursor:pointer; color: var(--coral-deep);
-    padding: 8%;
+    position:absolute; right:4%; top:-10%; width:19%;
+    background:none; border:none; box-shadow:none; padding:0;
+    display:flex; flex-direction:column; align-items:center; justify-content:flex-end; gap:6%;
+    cursor:pointer;
     transition: transform 0.15s ease;
   }
-  .calc-launch:hover, .calc-launch:focus-visible{ transform: translateY(-5%); }
-  .calc-launch svg{ width: clamp(20px,6cqw,34px); height: clamp(20px,6cqw,34px); flex-shrink:0; }
-  .calc-launch span{ font-size: clamp(8px,1.15cqw,11px); font-weight:700; color: var(--ink-paper); }
+  .calc-launch:hover, .calc-launch:focus-visible{ transform: translateY(-6%); }
+  .calc-launch svg{ width:100%; height:auto; aspect-ratio:1; flex-shrink:0; }
+  .calc-launch .tag{
+    font-size: clamp(11px,1.7cqw,15px); font-weight:700; color: var(--ink-paper);
+    background: var(--paper); padding: 3px 8px; border-radius:6px;
+    box-shadow: 0 2px 4px -2px var(--shadow); white-space:nowrap;
+  }
 
   /* ---- quick links (accessible backup list) ---- */
   .quick{
-    background: var(--paper); border-radius: 18px; padding: clamp(10px,1.6vw,16px);
+    background: var(--paper); border-radius: 18px; padding: clamp(8px,1.3vw,14px);
     box-shadow: 0 6px 16px -12px var(--shadow);
   }
   .quick h2{
@@ -391,9 +414,39 @@
   footer{ font-size:0.78rem; color:var(--ink-soft); text-align:center; }
 
   @media (prefers-reduced-motion: reduce){
-    .sign, .book, .calendar, .note, .photos .pic, .drawer, .calc-launch, .teacup svg{ transition:none !important; }
+    .sign, .book, .calendar, .note, .photos .pic, .calc-launch, .teacup svg, .drive-vase, .sconce{ transition:none !important; }
+    .note-heart, .bunny-eye, .steam{ animation:none !important; }
   }
   a:focus-visible, button:focus-visible{ outline: 3px solid var(--ring); outline-offset:2px; }
+
+  /* ---- wall sconce (Clever) — above the bookshelf ---- */
+  .sconce{
+    position:absolute; left:3%; top:7%; width:10%;
+    display:flex; flex-direction:column; align-items:center; gap:5%;
+    text-decoration:none; z-index:2; transition: transform 0.15s ease;
+  }
+  .sconce svg{ width:100%; height:auto; }
+  .sconce .tag{
+    font-size: clamp(9px,1.4cqw,12px); font-weight:700; color: var(--ink-paper);
+    background: var(--paper); padding: 2px 7px; border-radius:6px;
+    box-shadow: 0 2px 4px -2px var(--shadow); white-space:nowrap;
+  }
+  .sconce:hover, .sconce:focus-visible{ transform: translateY(-4%); }
+
+  /* ---- bunny, curled up on the armchair ---- */
+  .bunny{ position:absolute; left:29%; top:72%; width:15%; pointer-events:none; }
+  .bunny svg{ width:100%; height:auto; overflow:visible; }
+  .bunny-eye{ transform-box: fill-box; transform-origin: center; animation: bunnyBlink 5s ease-in-out infinite; }
+  @keyframes bunnyBlink{ 0%,90%,100%{ transform:scaleY(1); } 93%{ transform:scaleY(0.15); } 96%{ transform:scaleY(1); } }
+
+  /* ---- rising steam above the teacup ---- */
+  .steam{ transform-box: fill-box; transform-origin: center; animation: steamRise 2.6s ease-in-out infinite; }
+  .steam.s2{ animation-delay: 1s; }
+  @keyframes steamRise{
+    0%{ transform: translateY(0) scale(1); opacity:0.8; }
+    60%{ transform: translateY(-4px) scale(1.05); opacity:0.3; }
+    100%{ transform: translateY(-7px) scale(1.1); opacity:0; }
+  }
 
   /* ---------- calculator modal ---------- */
   .modal-backdrop{ position:fixed; inset:0; background:rgba(60,40,50,0.5); display:flex; align-items:center; justify-content:center; padding:20px; z-index:50; }
@@ -452,6 +505,18 @@
     <div class="sill-plant left" aria-hidden="true"><div class="pot"></div></div>
     <div class="sill-plant right" aria-hidden="true"><div class="pot"></div></div>
 
+    <!-- Wall sconce: Clever -->
+    <a class="sconce" href="https://clever.com/in/sfusd/teacher" target="_blank" rel="noopener">
+      <svg viewBox="0 0 26 34" aria-hidden="true">
+        <ellipse cx="13" cy="9" rx="10" ry="7" fill="var(--butter)" opacity="0.35"/>
+        <rect x="10.5" y="1" width="5" height="6" rx="1.5" fill="var(--wood-edge)"/>
+        <rect x="12.2" y="6" width="1.6" height="4" fill="var(--wood-edge)"/>
+        <path d="M6 20 L20 20 L16 10 L10 10 Z" fill="var(--coral)"/>
+        <ellipse cx="13" cy="20" rx="7" ry="1.6" fill="var(--coral-deep)"/>
+      </svg>
+      <span class="tag">Clever</span>
+    </a>
+
     <!-- Bookshelf: curriculum -->
     <div class="bookshelf">
       <div class="shelf-plant" aria-hidden="true"><div class="pot"></div></div>
@@ -475,14 +540,31 @@
       <div class="seat"></div>
       <div class="leg l"></div><div class="leg r"></div>
     </div>
+    <div class="bunny" aria-hidden="true">
+      <svg viewBox="0 0 40 40">
+        <ellipse cx="10" cy="16" rx="4.2" ry="10" fill="var(--paper)" transform="rotate(-25 10 16)"/>
+        <ellipse cx="10" cy="16" rx="2.2" ry="7.5" fill="var(--pink)" transform="rotate(-25 10 16)"/>
+        <ellipse cx="30" cy="16" rx="4.2" ry="10" fill="var(--paper)" transform="rotate(25 30 16)"/>
+        <ellipse cx="30" cy="16" rx="2.2" ry="7.5" fill="var(--pink)" transform="rotate(25 30 16)"/>
+        <ellipse cx="20" cy="30" rx="13" ry="9" fill="var(--paper)"/>
+        <ellipse cx="15" cy="37" rx="3" ry="2" fill="var(--paper)"/>
+        <ellipse cx="25" cy="37" rx="3" ry="2" fill="var(--paper)"/>
+        <circle cx="20" cy="20" r="9.5" fill="var(--paper)"/>
+        <circle cx="14.5" cy="22" r="1.8" fill="var(--pink)" opacity="0.6"/>
+        <circle cx="25.5" cy="22" r="1.8" fill="var(--pink)" opacity="0.6"/>
+        <ellipse class="bunny-eye" cx="16.5" cy="19" rx="1.4" ry="1.8" fill="var(--ink-paper)"/>
+        <ellipse class="bunny-eye" cx="23.5" cy="19" rx="1.4" ry="1.8" fill="var(--ink-paper)"/>
+        <path d="M18.7 22.5 L21.3 22.5 L20 24 Z" fill="var(--coral-deep)"/>
+      </svg>
+    </div>
     <div class="side-table" aria-hidden="true">
       <div class="top"></div>
       <div class="leg l"></div><div class="leg r"></div>
     </div>
     <a class="teacup" href="https://docs.google.com/document/d/11VSzPcHyGwkwudUosTndIwfrDwOWREf-hq1jKM5muWE/edit?tab=t.0" target="_blank" rel="noopener">
       <svg viewBox="0 0 32 32" aria-hidden="true">
-        <path d="M13 9q-1.6-2 0-4" fill="none" stroke="var(--ink-paper-soft)" stroke-width="1.6" stroke-linecap="round"/>
-        <path d="M19 9q-1.6-2 0-4" fill="none" stroke="var(--ink-paper-soft)" stroke-width="1.6" stroke-linecap="round"/>
+        <path class="steam s1" d="M13 9q-1.6-2 0-4" fill="none" stroke="var(--ink-paper-soft)" stroke-width="1.6" stroke-linecap="round"/>
+        <path class="steam s2" d="M19 9q-1.6-2 0-4" fill="none" stroke="var(--ink-paper-soft)" stroke-width="1.6" stroke-linecap="round"/>
         <ellipse cx="16" cy="27" rx="10.5" ry="2.3" fill="var(--paper-c)" stroke="var(--wood-edge)" stroke-width="1"/>
         <path d="M23 15q5 0 5 5t-5 5" fill="none" stroke="var(--wood-deep)" stroke-width="2.2" stroke-linecap="round"/>
         <path d="M9 12h14l-1.4 12.2c-.15 1.3-1.25 2.3-2.55 2.3h-6.1c-1.3 0-2.4-1-2.55-2.3Z" fill="var(--coral)"/>
@@ -499,15 +581,17 @@
 
     <!-- Corkboard: requests + logistics -->
     <div class="corkboard">
-      <a class="note" href="https://www.google.com/search?q=school+field+trip+request+portal" target="_blank" rel="noopener">Field Trip Portal*</a>
-      <a class="note" href="https://docs.google.com/spreadsheets/d/1vmJ4RaHc4bUthfQsTiNXKXSnMi0M6C8uu2kt6Naxz4g/edit?gid=1244768649#gid=1244768649" target="_blank" rel="noopener">Work Order Request Form</a>
-      <a class="note" href="https://www.google.com/search?q=Prop+G+hours+timesheet+teacher" target="_blank" rel="noopener">Prop G Hours*</a>
-      <a class="note" href="https://ca-sfu.edupoint.com" target="_blank" rel="noopener">Synergy</a>
-      <a class="note" href="https://app.redroverk12.com/" target="_blank" rel="noopener">Red Rover</a>
-      <a class="note" href="https://clever.com/in/sfusd/teacher" target="_blank" rel="noopener">Clever</a>
-      <a class="note" href="https://docs.google.com/document/d/1r5QtnMY6S3qWyejvMPg6Dswje4zfR18xGUKxrqp3D00/edit?tab=t.csb45gpkz129" target="_blank" rel="noopener">Staff Meeting</a>
-      <a class="note" href="https://docs.google.com/document/d/1GXfTkQzfRa20akzQ7NM1E-8jx8nxkxmCwVoS9npbge8/edit?tab=t.0" target="_blank" rel="noopener">Panther Powers</a>
-      <a class="note" href="https://docs.google.com/document/d/1y_ysFa-zihk0oOXIOQ1D2Ja-qAriFsDFzOKJbu2LnoM/edit?tab=t.0" target="_blank" rel="noopener">Professional Development</a>
+      <a class="note-heart" href="https://ca-sfu.edupoint.com" target="_blank" rel="noopener" aria-label="Synergy — daily attendance">
+        <svg viewBox="0 0 32 30" aria-hidden="true"><path d="M16 27C16 27 3 18.5 3 10.5C3 6.4 6.1 3 10 3C12.6 3 14.8 4.5 16 6.7C17.2 4.5 19.4 3 22 3C25.9 3 29 6.4 29 10.5C29 18.5 16 27 16 27Z" fill="var(--pink-deep)" stroke="var(--coral-deep)" stroke-width="1"/></svg>
+        <span>Synergy</span>
+      </a>
+      <a class="note rot-a bg-a" href="https://www.google.com/search?q=school+field+trip+request+portal" target="_blank" rel="noopener">Field Trip Portal*</a>
+      <a class="note rot-b bg-b" href="https://docs.google.com/spreadsheets/d/1vmJ4RaHc4bUthfQsTiNXKXSnMi0M6C8uu2kt6Naxz4g/edit?gid=1244768649#gid=1244768649" target="_blank" rel="noopener">Work Order Request Form</a>
+      <a class="note rot-c bg-c" href="https://www.google.com/search?q=Prop+G+hours+timesheet+teacher" target="_blank" rel="noopener">Prop G Hours*</a>
+      <a class="note rot-a bg-b" href="https://app.redroverk12.com/" target="_blank" rel="noopener">Red Rover</a>
+      <a class="note rot-b bg-c" href="https://docs.google.com/document/d/1r5QtnMY6S3qWyejvMPg6Dswje4zfR18xGUKxrqp3D00/edit?tab=t.csb45gpkz129" target="_blank" rel="noopener">Staff Meeting</a>
+      <a class="note rot-c bg-a" href="https://docs.google.com/document/d/1GXfTkQzfRa20akzQ7NM1E-8jx8nxkxmCwVoS9npbge8/edit?tab=t.0" target="_blank" rel="noopener">Panther Powers</a>
+      <a class="note rot-a bg-c" href="https://docs.google.com/document/d/1y_ysFa-zihk0oOXIOQ1D2Ja-qAriFsDFzOKJbu2LnoM/edit?tab=t.0" target="_blank" rel="noopener">Professional Development</a>
     </div>
 
     <!-- Photos -->
@@ -520,8 +604,37 @@
     <!-- Desk: Drive + calculator -->
     <div class="desk">
       <div class="top" aria-hidden="true"></div>
-      <a class="drawer" href="https://drive.google.com/drive/folders/0B6u9ZhTP6vxQbW14YVpKSGl3RTA?resourcekey=0-hIPOt8D_78BZqNk6HEVsDg" target="_blank" rel="noopener">
-        <div class="pull"></div>
+      <div class="drawer" aria-hidden="true"><div class="pull"></div></div>
+      <a class="drive-vase" href="https://drive.google.com/drive/folders/0B6u9ZhTP6vxQbW14YVpKSGl3RTA?resourcekey=0-hIPOt8D_78BZqNk6HEVsDg" target="_blank" rel="noopener">
+        <svg viewBox="0 0 32 40" aria-hidden="true">
+          <path d="M13 23 L10.5 12" stroke="var(--sage-deep)" stroke-width="1.3" fill="none" stroke-linecap="round"/>
+          <path d="M16 23 L16 8" stroke="var(--sage-deep)" stroke-width="1.3" fill="none" stroke-linecap="round"/>
+          <path d="M19 23 L21.5 13" stroke="var(--sage-deep)" stroke-width="1.3" fill="none" stroke-linecap="round"/>
+          <ellipse cx="12" cy="18" rx="3.2" ry="1.6" fill="var(--sage)" transform="rotate(-30 12 18)"/>
+          <ellipse cx="19.5" cy="17" rx="3" ry="1.5" fill="var(--sage)" transform="rotate(35 19.5 17)"/>
+          <ellipse cx="16" cy="14" rx="2.6" ry="1.3" fill="var(--sage-deep)" transform="rotate(-8 16 14)"/>
+          <circle cx="8.3" cy="12.6" r="2.6" fill="var(--pink)"/>
+          <circle cx="12.6" cy="12.4" r="2.6" fill="var(--pink)"/>
+          <circle cx="9" cy="9.4" r="2.6" fill="var(--pink-deep)"/>
+          <circle cx="12.1" cy="9.2" r="2.6" fill="var(--pink-deep)"/>
+          <circle cx="10.5" cy="11" r="3.1" fill="var(--coral)"/>
+          <circle cx="10.5" cy="11" r="1.3" fill="var(--butter-deep)"/>
+          <circle cx="13.4" cy="9.1" r="3" fill="var(--coral)"/>
+          <circle cx="18.6" cy="9" r="3" fill="var(--coral)"/>
+          <circle cx="14" cy="5.6" r="3" fill="var(--pink)"/>
+          <circle cx="18" cy="5.5" r="3" fill="var(--pink)"/>
+          <circle cx="16" cy="7.5" r="3.6" fill="var(--pink-deep)"/>
+          <circle cx="16" cy="7.5" r="1.5" fill="var(--butter-deep)"/>
+          <circle cx="19.3" cy="13.5" r="2.6" fill="var(--pink-deep)"/>
+          <circle cx="23.6" cy="13.3" r="2.6" fill="var(--pink-deep)"/>
+          <circle cx="20" cy="10.3" r="2.6" fill="var(--coral)"/>
+          <circle cx="23.1" cy="10.1" r="2.6" fill="var(--coral)"/>
+          <circle cx="21.5" cy="12" r="3.1" fill="var(--pink)"/>
+          <circle cx="21.5" cy="12" r="1.3" fill="var(--butter-deep)"/>
+          <path d="M10,25 L22,25 L24,37 Q24,39.5 21.5,39.5 L10.5,39.5 Q8,39.5 8,37 Z" fill="var(--mint-deep)"/>
+          <rect x="9.5" y="22.5" width="13" height="3.6" rx="1.6" fill="var(--mint)"/>
+          <rect x="11" y="28" width="2" height="9" rx="1" fill="var(--paper)" opacity="0.25"/>
+        </svg>
         <span class="tag">Drive</span>
       </a>
       <button class="calc-launch" type="button" id="calc-open">
@@ -537,7 +650,7 @@
           <rect x="8.2" y="23.8" width="10.1" height="3.6" rx="1" fill="var(--butter-deep)"/>
           <rect x="19.2" y="23.8" width="4.6" height="3.6" rx="1" fill="var(--coral-deep)"/>
         </svg>
-        <span>Calculator</span>
+        <span class="tag">Calculator</span>
       </button>
     </div>
   </div>
