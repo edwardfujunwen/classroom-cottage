@@ -1,0 +1,665 @@
+<title>The Classroom Cottage</title>
+<meta charset="utf-8">
+<style>
+  :root{
+    --wall:#F7EFEA;
+    --floor-a:#E8CFA9;
+    --floor-b:#DEBF94;
+    --base:#E9DCC9;
+    --wood:#D8B98C;
+    --wood-edge:#B79367;
+    --wood-deep:#A9835A;
+    --ink:#5B4636;
+    --ink-soft:#8A7461;
+    --paper:#FFFBF4;
+    --paper-b:#FBF0DE;
+    --paper-c:#F6E6C9;
+    --pink:#F3C9CE;
+    --pink-deep:#E6A3AC;
+    --coral:#F1A98B;
+    --coral-deep:#DD8362;
+    --mint:#A9D8C4;
+    --mint-deep:#7CB89E;
+    --butter:#F6E3A1;
+    --butter-deep:#E3C765;
+    --lav:#C9BFE0;
+    --lav-deep:#A99BC9;
+    --sky1:#BFE0EE;
+    --sky2:#EAD9EA;
+    --sky3:#F6E3D0;
+    --shadow: rgba(140,110,90,0.24);
+    --ring: rgba(221,131,98,0.65);
+    --ink-paper:#4A3324;
+    --ink-paper-soft:#8A7461;
+    color-scheme: light;
+  }
+  /* Locked to the light cottage palette regardless of system or viewer dark-mode setting. */
+
+  *{ box-sizing:border-box; }
+  body{ margin:0; }
+  .page{
+    background: var(--base);
+    color: var(--ink);
+    font-family: -apple-system,"SF Pro Rounded","Segoe UI",ui-rounded,system-ui,sans-serif;
+    min-height:100%;
+    padding: clamp(14px,3vw,32px);
+    display:flex;
+    flex-direction:column;
+    gap: clamp(14px,2.4vw,22px);
+  }
+  .masthead{ text-align:center; }
+  .masthead .eyebrow{
+    font-size:0.72rem; letter-spacing:0.16em; text-transform:uppercase;
+    color: var(--coral-deep); font-weight:700; margin:0 0 4px;
+  }
+  .masthead h1{
+    font-family: Georgia,"Iowan Old Style","Palatino Linotype",serif;
+    font-size: clamp(1.5rem,3.4vw,2.3rem);
+    margin:0 0 4px; text-wrap:balance;
+  }
+  .masthead p{ margin:0; color:var(--ink-soft); font-size:0.92rem; }
+
+  /* ================= ROOM ================= */
+  .room{
+    position:relative;
+    container-type: inline-size;
+    aspect-ratio: 16 / 10.5;
+    border-radius: 22px;
+    overflow:hidden;
+    box-shadow: 0 18px 40px -18px var(--shadow), 0 0 0 clamp(6px,1.4cqw,14px) var(--wood);
+    background: var(--wall);
+  }
+  .wall{
+    position:absolute; inset:0 0 15% 0;
+    background: linear-gradient(180deg, var(--wall), color-mix(in srgb, var(--pink) 22%, var(--wall)));
+  }
+  .baseboard{
+    position:absolute; left:0; right:0; bottom:15%; height: clamp(3px,0.8cqw,7px);
+    background: var(--wood-edge);
+  }
+  .floor{
+    position:absolute; left:0; right:0; bottom:0; height:15%;
+    background-image: repeating-linear-gradient(90deg, var(--floor-a) 0 6cqw, var(--floor-b) 6cqw 6.2cqw);
+    box-shadow: inset 0 6px 10px -6px rgba(0,0,0,0.2);
+  }
+
+  /* bunting */
+  .bunting{
+    position:absolute; top:1.5%; left:3%; right:3%; height:5%;
+    display:flex; align-items:flex-start; justify-content:space-between;
+    border-top: clamp(1px,0.3cqw,2px) solid var(--wood-edge);
+  }
+  .bunting span{
+    width: 4cqw; height: 4.6cqw;
+    clip-path: polygon(0 0, 100% 0, 50% 100%);
+    margin-top:-1px;
+  }
+  .bunting span:nth-child(4n+1){ background: var(--coral); }
+  .bunting span:nth-child(4n+2){ background: var(--mint); }
+  .bunting span:nth-child(4n+3){ background: var(--butter); }
+  .bunting span:nth-child(4n+4){ background: var(--lav); }
+
+  /* hanging welcome sign */
+  .sign{
+    position:absolute; top:7%; left:33%; width:34%; height:8%;
+    background: var(--paper);
+    border-radius: 999px;
+    box-shadow: 0 6px 14px -8px var(--shadow), inset 0 0 0 clamp(1px,0.4cqw,3px) var(--pink-deep);
+    display:flex; align-items:center; justify-content:center; gap:1.4cqw;
+    text-decoration:none; color: var(--ink-paper);
+    transform: rotate(-1deg);
+    transition: transform 0.15s ease;
+    z-index:3;
+  }
+  .sign::before, .sign::after{
+    content:""; position:absolute; top:-7%; width: clamp(1px,0.3cqw,2px); height:7%;
+    background: var(--wood-edge);
+  }
+  .sign::before{ left:20%; }
+  .sign::after{ right:20%; }
+  .sign svg{ width: clamp(14px,2.2cqw,19px); height: clamp(14px,2.2cqw,19px); flex-shrink:0; }
+  .sign span{ font-weight:700; font-size: clamp(10px,1.6cqw,14px); }
+  .sign:hover, .sign:focus-visible{ transform: rotate(0deg) scale(1.03); }
+
+  /* ---- big nature window (the "back wall" view) ---- */
+  .window{
+    position:absolute; top:14%; left:26%; width:48%; height:47%;
+    border-radius: 46% 46% 6px 6px;
+    background: var(--wood);
+    box-shadow: 0 12px 22px -14px var(--shadow), inset 0 0 0 clamp(3px,0.9cqw,8px) var(--wood-edge);
+    padding: clamp(6px,1.6cqw,14px);
+  }
+  .window .glass{
+    position:relative; width:100%; height:100%; overflow:hidden;
+    border-radius: 42% 42% 2px 2px;
+    background: linear-gradient(180deg, var(--sky1) 0%, var(--sky2) 55%, var(--sky3) 100%);
+  }
+  .window .sun{
+    position:absolute; top:8%; left:14%; width:22%; aspect-ratio:1; border-radius:50%;
+    background: radial-gradient(circle, var(--butter) 0%, color-mix(in srgb, var(--butter) 40%, transparent) 60%, transparent 75%);
+  }
+  .window .cloud{ position:absolute; background: color-mix(in srgb, var(--paper) 85%, transparent); border-radius:50%; }
+  .window .cloud.c1{ top:14%; left:55%; width:18%; height:34%; }
+  .window .cloud.c2{ top:20%; left:66%; width:14%; height:26%; }
+  .window .hill{ position:absolute; left:-10%; right:-10%; border-radius:50% 50% 0 0; }
+  .window .hill.back{ bottom:-4%; height:38%; background: var(--mint); opacity:0.85; }
+  .window .hill.front{ bottom:-8%; height:26%; background: var(--mint-deep); }
+  .window .tree{ position:absolute; bottom:16%; left:12%; width:12%; }
+  .window .tree .trunk{ width:16%; height:34%; background: var(--wood-deep); margin:0 auto; }
+  .window .tree .leaves{ width:100%; aspect-ratio:1; border-radius:50%; background: var(--mint-deep); margin-bottom:-6%; }
+  .window .bird{ position:absolute; width:9%; opacity:0.7; }
+  .window .bird::before, .window .bird::after{
+    content:""; position:absolute; top:0; width:60%; height: clamp(1px,0.3cqw,2px); background: var(--ink-soft);
+    border-radius:2px; transform-origin: 0 50%;
+  }
+  .window .bird::before{ transform: rotate(28deg); }
+  .window .bird::after{ left:40%; transform: rotate(-28deg) scaleX(-1); }
+  .window .bird.b1{ top:22%; left:20%; }
+  .window .bird.b2{ top:32%; left:32%; width:7%; }
+  .sill{
+    position:absolute; top:61%; left:24%; width:52%; height:3%;
+    background: var(--wood-edge); border-radius:3px;
+    box-shadow: 0 4px 6px -3px var(--shadow);
+  }
+  .sill-plant{ position:absolute; top:57.5%; width:6%; }
+  .sill-plant.left{ left:27%; } .sill-plant.right{ left:66%; }
+  .sill-plant .pot{ background: var(--coral); aspect-ratio:1.3; border-radius:0 0 30% 30%; position:relative; }
+  .sill-plant .pot::before{
+    content:""; position:absolute; bottom:80%; left:10%; width:80%; height:110%;
+    background: var(--mint-deep); clip-path: polygon(50% 0,100% 100%,0 100%);
+  }
+  .curtain{ position:absolute; top:12%; width:9%; height:50%; border-radius: 0 0 40% 0; }
+  .curtain.left{ left:22%; background: linear-gradient(90deg, var(--pink), color-mix(in srgb, var(--pink) 40%, var(--wall))); clip-path: polygon(0 0,100% 0,60% 100%,0 100%); }
+  .curtain.right{ left:69%; background: linear-gradient(270deg, var(--pink), color-mix(in srgb, var(--pink) 40%, var(--wall))); clip-path: polygon(0 0,100% 0,100% 100%,40% 100%); }
+
+  /* ---- bookshelf ---- */
+  .bookshelf{ position:absolute; left:2.5%; top:32%; width:22%; height:60%; }
+  .shelf-plant{ position:absolute; left:4%; top:-11%; width:20%; }
+  .shelf-plant .pot{ background: var(--lav); aspect-ratio:1.4; border-radius:0 0 30% 30%; position:relative; }
+  .shelf-plant .pot::before{
+    content:""; position:absolute; bottom:80%; left:15%; width:70%; height:120%;
+    background: var(--mint-deep); clip-path: polygon(50% 0,100% 100%,0 100%);
+  }
+  .shelf-frame{
+    position:absolute; inset:0;
+    background: var(--wood);
+    border-radius: clamp(4px,1.2cqw,10px);
+    box-shadow: inset 0 0 0 clamp(2px,0.7cqw,7px) var(--wood-edge), 0 10px 20px -12px var(--shadow);
+    display:flex; flex-direction:column; gap: 10%;
+    padding: 7% 6% 12%;
+  }
+  .tier{
+    flex:1; position:relative; display:flex; align-items:flex-end; justify-content:center; gap:8%;
+    border-bottom: clamp(3px,1cqw,9px) solid var(--wood-deep);
+    padding-bottom:3%;
+  }
+  .book{ flex:1; max-width:14cqw; height:82%; border-radius: 3px 3px 0 0; position:relative; margin-bottom: 2.4cqw;
+    box-shadow: inset -3px 0 0 rgba(0,0,0,0.12), 0 3px 6px -3px rgba(0,0,0,0.3);
+    transition: transform 0.15s ease;
+  }
+  .book-link{ position:absolute; inset:0; display:block; }
+  .book:nth-child(1){ transform: rotate(-2deg); }
+  .book:nth-child(2){ transform: rotate(1.5deg); height:94%; }
+  .book:hover, .book:has(.book-link:focus-visible){ transform: translateY(-8%) rotate(0deg); }
+  .book.b1{ background: var(--coral); }
+  .book.b2{ background: var(--mint-deep); }
+  .book.b3{ background: var(--lav-deep); }
+  .book.b4{
+    background: repeating-linear-gradient(var(--paper-c),var(--paper-c) 6px, var(--paper-b) 6px 8px);
+    border: clamp(1px,0.3cqw,2px) dashed var(--coral-deep);
+  }
+  .book-tag{
+    position:absolute; bottom:-2.6cqw; left:50%; transform:translateX(-50%);
+    background: var(--paper); color: var(--ink-paper); font-weight:700; white-space:normal;
+    max-width: 13cqw; text-align:center; line-height:1.15;
+    font-size: clamp(7px,1.1cqw,10px); padding: 3px 6px; border-radius:6px;
+    box-shadow: 0 2px 4px -2px var(--shadow); pointer-events:none;
+  }
+
+  /* ---- reading nook ---- */
+  .rug{
+    position:absolute; left:16%; top:63%; width:50%; height:33%;
+    border-radius:50%;
+    background: var(--pink);
+    box-shadow: 0 0 0 clamp(4px,1.4cqw,12px) var(--paper), 0 10px 20px -10px var(--shadow);
+    opacity:0.85;
+  }
+  .armchair{ position:absolute; left:26%; top:63%; width:22%; height:33%; }
+  .armchair .back{
+    position:absolute; left:8%; right:8%; top:0; height:66%;
+    background-image: repeating-linear-gradient(var(--paper-b),var(--paper-b) 3cqw, var(--pink) 3cqw 3.4cqw), repeating-linear-gradient(90deg, transparent, transparent 3cqw, rgba(0,0,0,0.05) 3cqw 3.4cqw);
+    border-radius: 18% 18% 4% 4%;
+    box-shadow: 0 8px 16px -10px var(--shadow);
+  }
+  .armchair .seat{
+    position:absolute; left:0; right:0; bottom:18%; height:26%;
+    background: var(--pink); border-radius: 10%;
+    box-shadow: 0 6px 10px -6px var(--shadow);
+  }
+  .armchair .arm{ position:absolute; bottom:16%; width:14%; height:42%; background: var(--pink); border-radius: 30% 30% 10% 10%; }
+  .armchair .arm.l{ left:-3%; } .armchair .arm.r{ right:-3%; }
+  .armchair .leg{ position:absolute; bottom:0; width:5%; height:16%; background: var(--wood-deep); }
+  .armchair .leg.l{ left:12%; } .armchair .leg.r{ right:12%; }
+
+  .side-table{ position:absolute; left:50%; top:70%; width:12%; height:20%; }
+  .side-table .top{
+    position:absolute; top:0; left:0; right:0; height:34%;
+    background: var(--wood); border-radius:50%;
+    box-shadow: 0 4px 8px -4px var(--shadow), inset 0 0 0 clamp(1px,0.3cqw,2px) var(--wood-edge);
+  }
+  .side-table .leg{ position:absolute; bottom:0; width:6%; height:66%; background: var(--wood-deep); }
+  .side-table .leg.l{ left:24%; } .side-table .leg.r{ right:24%; }
+
+  .teacup{
+    position:absolute; left:52%; top:63%; width:9%; height:15%;
+    display:flex; flex-direction:column; align-items:center; justify-content:flex-end; gap:6%;
+    text-decoration:none; color:var(--ink); z-index:2;
+  }
+  .teacup svg{ width:100%; height:70%; transition: transform 0.15s ease; }
+  .teacup .tag{
+    font-size: clamp(9px,1.3cqw,12px); font-weight:700; color: var(--ink-paper);
+    background: var(--paper); padding: 2px 6px; border-radius:6px;
+    box-shadow: 0 2px 4px -2px var(--shadow); white-space:nowrap;
+  }
+  .teacup:hover svg, .teacup:focus-visible svg{ transform: translateY(-8%); }
+
+  /* ---- calendar ---- */
+  .calendar{
+    position:absolute; right:2%; top:4%; width:20%; height:12%;
+    background: var(--paper); border-radius: clamp(3px,0.8cqw,7px);
+    box-shadow: 0 6px 14px -8px var(--shadow);
+    text-decoration:none; color:var(--ink); overflow:hidden;
+    transition: transform 0.15s ease;
+  }
+  .calendar:hover, .calendar:focus-visible{ transform: translateY(-4%); }
+  .calendar .head{
+    background: var(--coral); color: var(--ink-paper);
+    font-size: clamp(9px,1.4cqw,12px); font-weight:700; text-align:center;
+    padding: 7% 0 5%;
+  }
+  .calendar .grid{ display:grid; grid-template-columns: repeat(4,1fr); gap: 7%; padding: 9%; }
+  .calendar .grid span{ aspect-ratio:1; background: var(--paper-c); border-radius:2px; }
+  .calendar .grid span:nth-child(6){ background: var(--coral-deep); }
+
+  /* ---- corkboard ---- */
+  .corkboard{
+    position:absolute; left:66%; top:17%; width:32%; height:38%;
+    background: var(--wood);
+    border-radius: clamp(3px,0.8cqw,7px);
+    box-shadow: 0 8px 16px -10px var(--shadow), inset 0 0 0 clamp(3px,0.9cqw,8px) var(--wood-edge);
+    display:flex; flex-wrap:wrap; align-content:flex-start; justify-content:center;
+    gap: 4%; padding: 7%;
+  }
+  .note{
+    flex: 1 1 28%; max-width:30%;
+    background: var(--paper-b);
+    border-radius: 3px;
+    padding: 7% 4%;
+    text-align:center;
+    text-decoration:none; color:var(--ink-paper);
+    font-size: clamp(7.5px,1.05cqw,10.5px);
+    font-weight:700; line-height:1.25;
+    box-shadow: 0 4px 8px -4px rgba(0,0,0,0.3);
+    position:relative;
+    transition: transform 0.15s ease;
+  }
+  .note::before{
+    content:""; position:absolute; top:-5%; left:50%; transform:translateX(-50%);
+    width: clamp(8px,1.7cqw,14px); height: clamp(8px,1.7cqw,14px); border-radius:50%;
+    background: radial-gradient(circle at 35% 30%, #fff8, var(--coral-deep));
+    box-shadow: 0 2px 3px -1px rgba(0,0,0,0.45);
+  }
+  .note:nth-child(1){ transform: rotate(-3deg); background: var(--paper); }
+  .note:nth-child(2){ transform: rotate(2deg); }
+  .note:nth-child(3){ transform: rotate(-1.5deg); background: var(--paper-c); }
+  .note:nth-child(4){ transform: rotate(2.5deg); }
+  .note:nth-child(5){ transform: rotate(-2deg); background: var(--paper); }
+  .note:nth-child(6){ transform: rotate(1.5deg); background: var(--paper-c); }
+  .note:nth-child(7){ transform: rotate(-2.5deg); }
+  .note:nth-child(8){ transform: rotate(2deg); background: var(--paper); }
+  .note:nth-child(9){ transform: rotate(-1.5deg); background: var(--paper-c); }
+  .note:hover, .note:focus-visible{ transform: translateY(-5%) rotate(0deg); }
+  .note .go{ display:block; margin-top:5%; font-size:0.85em; color: var(--coral-deep); font-weight:700; }
+
+  /* ---- photos ---- */
+  .photos{ position:absolute; right:6%; top:57%; width:20%; height:12%; text-decoration:none; color:var(--ink-paper); }
+  .photos .pic{ position:absolute; width:44%; aspect-ratio:0.86; background: var(--paper); padding: 6% 6% 16%; box-shadow: 0 6px 10px -6px var(--shadow); transition: transform 0.15s ease; }
+  .photos .pic i{ display:block; width:100%; height:100%; }
+  .photos .pic:nth-child(1){ left:0; top:8%; transform: rotate(-6deg); z-index:1; }
+  .photos .pic:nth-child(1) i{ background: linear-gradient(135deg, var(--mint), var(--butter)); }
+  .photos .pic:nth-child(2){ left:26%; top:0%; transform: rotate(5deg); z-index:2; }
+  .photos .pic:nth-child(2) i{ background: linear-gradient(135deg, var(--coral), var(--lav)); }
+  .photos .cap{
+    position:absolute; left:0; bottom:0; font-size: clamp(9px,1.3cqw,12px); font-weight:700;
+    background: var(--paper); padding: 2px 7px; border-radius:6px; box-shadow: 0 2px 4px -2px var(--shadow);
+  }
+  .photos:hover .pic, .photos:focus-visible .pic{ transform: rotate(0deg); }
+
+  /* ---- desk ---- */
+  .desk{ position:absolute; right:2%; top:73%; width:33%; height:23%; }
+  .desk .top{ position:absolute; top:0; left:-4%; right:-4%; height:20%; background: var(--wood); border-radius: 3px; box-shadow: 0 4px 8px -4px var(--shadow); }
+  .drawer{
+    position:absolute; left:0; right:0; top:18%; bottom:0;
+    background: var(--wood-edge);
+    border-radius: 0 0 clamp(3px,0.8cqw,6px) clamp(3px,0.8cqw,6px);
+    text-decoration:none;
+    box-shadow: inset 0 0 0 clamp(2px,0.6cqw,5px) var(--wood-deep);
+    display:flex; align-items:center; justify-content:center;
+    transition: transform 0.15s ease;
+  }
+  .drawer:hover, .drawer:focus-visible{ transform: translateY(2%); }
+  .drawer .pull{ width:34%; height: clamp(4px,1.1cqw,8px); background: var(--paper); border-radius:6px; box-shadow: 0 0 0 clamp(2px,0.5cqw,4px) var(--wood-deep); }
+  .drawer .tag{
+    position:absolute; left:50%; bottom:10%; transform:translateX(-50%);
+    background: var(--paper); color: var(--ink-paper); font-size: clamp(10px,1.5cqw,13px); font-weight:700;
+    padding: 2px 9px; border-radius:6px; box-shadow: 0 2px 4px -2px var(--shadow);
+  }
+  .calc-launch{
+    position:absolute; right:8%; top:-16%; width:17%; aspect-ratio:0.85;
+    background: var(--paper); border: none; border-radius: clamp(3px,0.8cqw,6px);
+    box-shadow: 0 6px 10px -6px var(--shadow);
+    display:flex; flex-direction:column; align-items:center; justify-content:center; gap:8%;
+    cursor:pointer; color: var(--coral-deep);
+    padding: 8%;
+    transition: transform 0.15s ease;
+  }
+  .calc-launch:hover, .calc-launch:focus-visible{ transform: translateY(-5%); }
+  .calc-launch svg{ width: clamp(20px,6cqw,34px); height: clamp(20px,6cqw,34px); flex-shrink:0; }
+  .calc-launch span{ font-size: clamp(8px,1.15cqw,11px); font-weight:700; color: var(--ink-paper); }
+
+  /* ---- quick links (accessible backup list) ---- */
+  .quick{
+    background: var(--paper); border-radius: 18px; padding: clamp(10px,1.6vw,16px);
+    box-shadow: 0 6px 16px -12px var(--shadow);
+  }
+  .quick h2{
+    font-family: Georgia,serif; font-size: 0.92rem; margin: 0 0 10px; color: var(--ink-paper);
+  }
+  .quick-grid{
+    display:flex; flex-wrap:wrap; gap: 8px;
+  }
+  .quick-grid a, .quick-grid button{
+    display:inline-flex; align-items:center; gap:6px;
+    background: var(--paper-b); color: var(--ink-paper); text-decoration:none;
+    border: none; border-radius: 999px; padding: 7px 12px 7px 8px;
+    font-size: 0.82rem; font-weight:700; cursor:pointer;
+    box-shadow: 0 3px 8px -5px var(--shadow);
+  }
+  .quick-grid .dot{ width:9px; height:9px; border-radius:50%; flex-shrink:0; }
+  .quick-grid a.tbd{ border: 1.5px dashed var(--coral-deep); background: var(--paper); }
+
+  footer{ font-size:0.78rem; color:var(--ink-soft); text-align:center; }
+
+  @media (prefers-reduced-motion: reduce){
+    .sign, .book, .calendar, .note, .photos .pic, .drawer, .calc-launch, .teacup svg{ transition:none !important; }
+  }
+  a:focus-visible, button:focus-visible{ outline: 3px solid var(--ring); outline-offset:2px; }
+
+  /* ---------- calculator modal ---------- */
+  .modal-backdrop{ position:fixed; inset:0; background:rgba(60,40,50,0.5); display:flex; align-items:center; justify-content:center; padding:20px; z-index:50; }
+  .modal-backdrop[hidden]{ display:none; }
+  .calc{ background: var(--paper); border-radius:22px; padding:18px; width:min(280px,90vw); box-shadow:0 20px 40px -16px rgba(0,0,0,0.45); border:1px solid var(--wood); }
+  .calc-head{ display:flex; align-items:center; justify-content:space-between; margin-bottom:10px; }
+  .calc-head h3{ font-family:Georgia,serif; font-size:1rem; margin:0; color:var(--ink-paper); }
+  .calc-close{ background:none; border:none; cursor:pointer; color:var(--ink-paper-soft); font-size:1.1rem; line-height:1; padding:4px; }
+  .calc-display{ background: var(--paper-c); border-radius:12px; padding:14px 12px; text-align:right; font-variant-numeric:tabular-nums; font-size:1.6rem; color:var(--ink-paper); margin-bottom:10px; min-height:1.4em; overflow-x:auto; white-space:nowrap; }
+  .calc-grid{ display:grid; grid-template-columns:repeat(4,1fr); gap:8px; }
+  .calc-grid button{ border:none; border-radius:12px; padding:14px 0; font-size:1rem; font-weight:600; cursor:pointer; background:var(--paper-c); color:var(--ink-paper); font-variant-numeric:tabular-nums; }
+  .calc-grid button.op{ background: color-mix(in srgb, var(--coral) 35%, var(--paper)); color:var(--coral-deep); }
+  .calc-grid button.eq{ background: var(--coral); color: var(--ink-paper); }
+  .calc-grid button.wide{ grid-column:span 2; }
+</style>
+
+<div class="page">
+
+  <div class="masthead">
+    <p class="eyebrow">Kindergarten Command Center</p>
+    <h1>Welcome to the cottage</h1>
+    <p>Sign in with Google, then click any labeled piece in the room — or use the quick list below.</p>
+  </div>
+
+  <div class="room">
+    <div class="wall"></div>
+    <div class="baseboard"></div>
+    <div class="floor"></div>
+
+    <div class="bunting" aria-hidden="true">
+      <span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+      <span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+    </div>
+
+    <a class="sign" href="https://accounts.google.com/" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#EA4335" d="M12 10.2v3.9h5.5c-.24 1.4-1.7 4.1-5.5 4.1-3.3 0-6-2.7-6-6.1s2.7-6.1 6-6.1c1.9 0 3.1.8 3.9 1.5l2.7-2.6C16.9 3.1 14.7 2 12 2 6.9 2 2.7 6.1 2.7 11.2S6.9 20.5 12 20.5c6.9 0 9.6-4.8 9.6-7.3 0-.5-.1-.9-.1-1.2H12z"/></svg>
+      <span>Sign in to Google</span>
+    </a>
+
+    <!-- Big window: the view outside replaces a plain back wall -->
+    <div class="window" aria-hidden="true">
+      <div class="glass">
+        <div class="sun"></div>
+        <div class="cloud c1"></div>
+        <div class="cloud c2"></div>
+        <div class="hill back"></div>
+        <div class="bird b1"></div>
+        <div class="bird b2"></div>
+        <div class="hill front"></div>
+        <div class="tree"><div class="leaves"></div><div class="trunk"></div></div>
+      </div>
+    </div>
+    <div class="curtain left" aria-hidden="true"></div>
+    <div class="curtain right" aria-hidden="true"></div>
+    <div class="sill" aria-hidden="true"></div>
+    <div class="sill-plant left" aria-hidden="true"><div class="pot"></div></div>
+    <div class="sill-plant right" aria-hidden="true"><div class="pot"></div></div>
+
+    <!-- Bookshelf: curriculum -->
+    <div class="bookshelf">
+      <div class="shelf-plant" aria-hidden="true"><div class="pot"></div></div>
+      <div class="shelf-frame">
+        <div class="tier">
+          <div class="book b1"><a class="book-link" href="https://ed.hmhco.com/" target="_blank" rel="noopener" aria-label="HMH reading curriculum"></a><span class="book-tag">HMH</span></div>
+          <div class="book b2"><a class="book-link" href="https://sfusd.ilclassroom.com/wikis/28274292-kindergarten?path=Wiki.24888774%2FWiki.28344721" target="_blank" rel="noopener" aria-label="Imagine Math"></a><span class="book-tag">Imagine Math</span></div>
+        </div>
+        <div class="tier">
+          <div class="book b3"><a class="book-link" href="https://learning.amplify.com/" target="_blank" rel="noopener" aria-label="Amplify Science"></a><span class="book-tag">Amplify Science</span></div>
+          <div class="book b4"><a class="book-link" href="https://www.google.com/search?q=kindergarten+social+studies+curriculum+login" target="_blank" rel="noopener" aria-label="Social Studies, link to confirm"></a><span class="book-tag">Social Studies*</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Reading nook -->
+    <div class="rug" aria-hidden="true"></div>
+    <div class="armchair" aria-hidden="true">
+      <div class="back"></div>
+      <div class="arm l"></div><div class="arm r"></div>
+      <div class="seat"></div>
+      <div class="leg l"></div><div class="leg r"></div>
+    </div>
+    <div class="side-table" aria-hidden="true">
+      <div class="top"></div>
+      <div class="leg l"></div><div class="leg r"></div>
+    </div>
+    <a class="teacup" href="https://docs.google.com/document/d/11VSzPcHyGwkwudUosTndIwfrDwOWREf-hq1jKM5muWE/edit?tab=t.0" target="_blank" rel="noopener">
+      <svg viewBox="0 0 32 32" aria-hidden="true">
+        <path d="M13 9q-1.6-2 0-4" fill="none" stroke="var(--ink-paper-soft)" stroke-width="1.6" stroke-linecap="round"/>
+        <path d="M19 9q-1.6-2 0-4" fill="none" stroke="var(--ink-paper-soft)" stroke-width="1.6" stroke-linecap="round"/>
+        <ellipse cx="16" cy="27" rx="10.5" ry="2.3" fill="var(--paper-c)" stroke="var(--wood-edge)" stroke-width="1"/>
+        <path d="M23 15q5 0 5 5t-5 5" fill="none" stroke="var(--wood-deep)" stroke-width="2.2" stroke-linecap="round"/>
+        <path d="M9 12h14l-1.4 12.2c-.15 1.3-1.25 2.3-2.55 2.3h-6.1c-1.3 0-2.4-1-2.55-2.3Z" fill="var(--coral)"/>
+        <ellipse cx="16" cy="12" rx="7" ry="1.9" fill="var(--wood-deep)"/>
+      </svg>
+      <span class="tag">The Brew</span>
+    </a>
+
+    <!-- Wall calendar -->
+    <a class="calendar" href="https://calendar.google.com/calendar/u/0/r" target="_blank" rel="noopener">
+      <div class="head">Calendar</div>
+      <div class="grid" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
+    </a>
+
+    <!-- Corkboard: requests + logistics -->
+    <div class="corkboard">
+      <a class="note" href="https://www.google.com/search?q=school+field+trip+request+portal" target="_blank" rel="noopener">Field Trip Portal*</a>
+      <a class="note" href="https://docs.google.com/spreadsheets/d/1vmJ4RaHc4bUthfQsTiNXKXSnMi0M6C8uu2kt6Naxz4g/edit?gid=1244768649#gid=1244768649" target="_blank" rel="noopener">Work Order Request Form</a>
+      <a class="note" href="https://www.google.com/search?q=Prop+G+hours+timesheet+teacher" target="_blank" rel="noopener">Prop G Hours*</a>
+      <a class="note" href="https://ca-sfu.edupoint.com" target="_blank" rel="noopener">Synergy</a>
+      <a class="note" href="https://app.redroverk12.com/" target="_blank" rel="noopener">Red Rover</a>
+      <a class="note" href="https://clever.com/in/sfusd/teacher" target="_blank" rel="noopener">Clever</a>
+      <a class="note" href="https://docs.google.com/document/d/1r5QtnMY6S3qWyejvMPg6Dswje4zfR18xGUKxrqp3D00/edit?tab=t.csb45gpkz129" target="_blank" rel="noopener">Staff Meeting</a>
+      <a class="note" href="https://docs.google.com/document/d/1GXfTkQzfRa20akzQ7NM1E-8jx8nxkxmCwVoS9npbge8/edit?tab=t.0" target="_blank" rel="noopener">Panther Powers</a>
+      <a class="note" href="https://docs.google.com/document/d/1y_ysFa-zihk0oOXIOQ1D2Ja-qAriFsDFzOKJbu2LnoM/edit?tab=t.0" target="_blank" rel="noopener">Professional Development</a>
+    </div>
+
+    <!-- Photos -->
+    <a class="photos" href="https://photos.google.com/albums" target="_blank" rel="noopener">
+      <span class="pic"><i></i></span>
+      <span class="pic"><i></i></span>
+      <span class="cap">Weekly Photos</span>
+    </a>
+
+    <!-- Desk: Drive + calculator -->
+    <div class="desk">
+      <div class="top" aria-hidden="true"></div>
+      <a class="drawer" href="https://drive.google.com/drive/folders/0B6u9ZhTP6vxQbW14YVpKSGl3RTA?resourcekey=0-hIPOt8D_78BZqNk6HEVsDg" target="_blank" rel="noopener">
+        <div class="pull"></div>
+        <span class="tag">Drive</span>
+      </a>
+      <button class="calc-launch" type="button" id="calc-open">
+        <svg viewBox="0 0 32 32" aria-hidden="true">
+          <rect x="5" y="2.5" width="22" height="27" rx="4" fill="var(--paper-c)" stroke="var(--wood-edge)" stroke-width="1.6"/>
+          <rect x="8" y="6" width="16" height="6.4" rx="1.4" fill="var(--wood-deep)" opacity="0.85"/>
+          <rect x="8.2" y="15" width="4.6" height="3.6" rx="1" fill="var(--coral)"/>
+          <rect x="13.7" y="15" width="4.6" height="3.6" rx="1" fill="var(--mint-deep)"/>
+          <rect x="19.2" y="15" width="4.6" height="3.6" rx="1" fill="var(--butter-deep)"/>
+          <rect x="8.2" y="19.4" width="4.6" height="3.6" rx="1" fill="var(--mint-deep)"/>
+          <rect x="13.7" y="19.4" width="4.6" height="3.6" rx="1" fill="var(--coral)"/>
+          <rect x="19.2" y="19.4" width="4.6" height="3.6" rx="1" fill="var(--butter-deep)"/>
+          <rect x="8.2" y="23.8" width="10.1" height="3.6" rx="1" fill="var(--butter-deep)"/>
+          <rect x="19.2" y="23.8" width="4.6" height="3.6" rx="1" fill="var(--coral-deep)"/>
+        </svg>
+        <span>Calculator</span>
+      </button>
+    </div>
+  </div>
+
+  <div class="quick">
+    <h2>Quick list — every link, at a glance</h2>
+    <div class="quick-grid">
+      <a href="https://drive.google.com/drive/folders/0B6u9ZhTP6vxQbW14YVpKSGl3RTA?resourcekey=0-hIPOt8D_78BZqNk6HEVsDg" target="_blank" rel="noopener"><span class="dot" style="background:var(--coral)"></span>Google Drive</a>
+      <a href="https://calendar.google.com/calendar/u/0/r" target="_blank" rel="noopener"><span class="dot" style="background:var(--mint)"></span>Calendar</a>
+      <a href="https://docs.google.com/document/d/11VSzPcHyGwkwudUosTndIwfrDwOWREf-hq1jKM5muWE/edit?tab=t.0" target="_blank" rel="noopener"><span class="dot" style="background:var(--lav)"></span>The Brew</a>
+      <a class="tbd" href="https://www.google.com/search?q=school+field+trip+request+portal" target="_blank" rel="noopener"><span class="dot" style="background:var(--butter)"></span>Field Trip Portal</a>
+      <a href="https://ed.hmhco.com/" target="_blank" rel="noopener"><span class="dot" style="background:var(--coral)"></span>HMH</a>
+      <a href="https://sfusd.ilclassroom.com/wikis/28274292-kindergarten?path=Wiki.24888774%2FWiki.28344721" target="_blank" rel="noopener"><span class="dot" style="background:var(--mint)"></span>Imagine Math</a>
+      <a href="https://learning.amplify.com/" target="_blank" rel="noopener"><span class="dot" style="background:var(--lav)"></span>Amplify Science</a>
+      <a class="tbd" href="https://www.google.com/search?q=kindergarten+social+studies+curriculum+login" target="_blank" rel="noopener"><span class="dot" style="background:var(--butter)"></span>Social Studies</a>
+      <a href="https://photos.google.com/albums" target="_blank" rel="noopener"><span class="dot" style="background:var(--coral)"></span>Weekly Photos</a>
+      <a href="https://ca-sfu.edupoint.com" target="_blank" rel="noopener"><span class="dot" style="background:var(--mint)"></span>Synergy</a>
+      <a href="https://app.redroverk12.com/" target="_blank" rel="noopener"><span class="dot" style="background:var(--lav)"></span>Red Rover</a>
+      <a href="https://docs.google.com/spreadsheets/d/1vmJ4RaHc4bUthfQsTiNXKXSnMi0M6C8uu2kt6Naxz4g/edit?gid=1244768649#gid=1244768649" target="_blank" rel="noopener"><span class="dot" style="background:var(--butter)"></span>Work Order Request Form</a>
+      <a class="tbd" href="https://www.google.com/search?q=Prop+G+hours+timesheet+teacher" target="_blank" rel="noopener"><span class="dot" style="background:var(--coral)"></span>Prop G Hours</a>
+      <a href="https://clever.com/in/sfusd/teacher" target="_blank" rel="noopener"><span class="dot" style="background:var(--lav)"></span>Clever</a>
+      <a href="https://docs.google.com/document/d/1r5QtnMY6S3qWyejvMPg6Dswje4zfR18xGUKxrqp3D00/edit?tab=t.csb45gpkz129" target="_blank" rel="noopener"><span class="dot" style="background:var(--mint)"></span>Staff Meeting</a>
+      <a href="https://docs.google.com/document/d/1GXfTkQzfRa20akzQ7NM1E-8jx8nxkxmCwVoS9npbge8/edit?tab=t.0" target="_blank" rel="noopener"><span class="dot" style="background:var(--coral)"></span>Panther Powers</a>
+      <a href="https://docs.google.com/document/d/1y_ysFa-zihk0oOXIOQ1D2Ja-qAriFsDFzOKJbu2LnoM/edit?tab=t.0" target="_blank" rel="noopener"><span class="dot" style="background:var(--butter)"></span>Professional Development</a>
+      <button type="button" id="calc-open-2"><span class="dot" style="background:var(--mint)"></span>Calculator</button>
+    </div>
+  </div>
+
+  <footer>Items marked * are placeholders — send the real links and they'll go straight in.</footer>
+</div>
+
+<div class="modal-backdrop" id="calc-backdrop" hidden>
+  <div class="calc" role="dialog" aria-modal="true" aria-label="Calculator">
+    <div class="calc-head">
+      <h3>Calculator</h3>
+      <button class="calc-close" id="calc-close" aria-label="Close calculator">✕</button>
+    </div>
+    <div class="calc-display" id="calc-display">0</div>
+    <div class="calc-grid">
+      <button data-act="clear" class="op wide">Clear</button>
+      <button data-act="back" class="op">⌫</button>
+      <button data-op="/" class="op">÷</button>
+      <button data-num="7">7</button>
+      <button data-num="8">8</button>
+      <button data-num="9">9</button>
+      <button data-op="*" class="op">×</button>
+      <button data-num="4">4</button>
+      <button data-num="5">5</button>
+      <button data-num="6">6</button>
+      <button data-op="-" class="op">−</button>
+      <button data-num="1">1</button>
+      <button data-num="2">2</button>
+      <button data-num="3">3</button>
+      <button data-op="+" class="op">+</button>
+      <button data-num="0" class="wide">0</button>
+      <button data-act="dot">.</button>
+      <button data-act="equals" class="eq">=</button>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  var backdrop = document.getElementById('calc-backdrop');
+  var display = document.getElementById('calc-display');
+  var openBtns = [document.getElementById('calc-open'), document.getElementById('calc-open-2')];
+  var closeBtn = document.getElementById('calc-close');
+
+  var current = '0';
+  var stored = null;
+  var pendingOp = null;
+  var justEvaluated = false;
+
+  function render(){ display.textContent = current; }
+
+  function inputNum(n){
+    if(justEvaluated){ current = '0'; justEvaluated = false; }
+    if(current === '0' && n !== '.') current = n;
+    else if(n === '.' && current.includes('.')) return;
+    else current += n;
+    render();
+  }
+  function inputOp(op){
+    if(pendingOp && !justEvaluated) compute();
+    stored = parseFloat(current);
+    pendingOp = op;
+    justEvaluated = false;
+    current = '0';
+  }
+  function compute(){
+    if(pendingOp === null || stored === null) return;
+    var a = stored, b = parseFloat(current), r = 0;
+    if(pendingOp === '+') r = a + b;
+    else if(pendingOp === '-') r = a - b;
+    else if(pendingOp === '*') r = a * b;
+    else if(pendingOp === '/') r = b === 0 ? NaN : a / b;
+    current = String(Math.round(r * 1e10) / 1e10);
+    stored = null;
+    pendingOp = null;
+    justEvaluated = true;
+    render();
+  }
+
+  document.querySelectorAll('.calc-grid button').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      var num = btn.getAttribute('data-num');
+      var op = btn.getAttribute('data-op');
+      var act = btn.getAttribute('data-act');
+      if(num !== null) inputNum(num);
+      else if(op !== null) inputOp(op);
+      else if(act === 'clear'){ current='0'; stored=null; pendingOp=null; justEvaluated=false; render(); }
+      else if(act === 'back'){ current = current.length>1 ? current.slice(0,-1) : '0'; render(); }
+      else if(act === 'dot') inputNum('.');
+      else if(act === 'equals') compute();
+    });
+  });
+
+  function openCalc(){ backdrop.hidden = false; }
+  function closeCalc(){ backdrop.hidden = true; }
+  openBtns.forEach(function(b){ if(b) b.addEventListener('click', openCalc); });
+  closeBtn.addEventListener('click', closeCalc);
+  backdrop.addEventListener('click', function(e){ if(e.target === backdrop) closeCalc(); });
+  document.addEventListener('keydown', function(e){ if(e.key === 'Escape' && !backdrop.hidden) closeCalc(); });
+})();
+</script>
