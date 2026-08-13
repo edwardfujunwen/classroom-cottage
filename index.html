@@ -45,22 +45,22 @@
     color: var(--ink);
     font-family: -apple-system,"SF Pro Rounded","Segoe UI",ui-rounded,system-ui,sans-serif;
     min-height:100%;
-    padding: clamp(8px,1.6vw,16px);
+    padding: clamp(10px,1.8vw,18px);
     display:flex;
     flex-direction:column;
-    gap: clamp(8px,1.3vw,12px);
+    gap: clamp(14px,1.8vw,20px);
   }
   .masthead{ text-align:center; }
   .masthead .eyebrow{
     font-size:0.72rem; letter-spacing:0.16em; text-transform:uppercase;
-    color: var(--coral-deep); font-weight:700; margin:0 0 3px;
+    color: var(--coral-deep); font-weight:700; margin:0 0 6px;
   }
   .masthead h1{
     font-family: Georgia,"Iowan Old Style","Palatino Linotype",serif;
     font-size: clamp(1.05rem,2.3vw,1.5rem);
-    margin:0 0 3px; text-wrap:balance;
+    margin:0 0 6px; text-wrap:balance;
   }
-  .masthead p{ margin:0; color:var(--ink-soft); font-size:0.78rem; }
+  .masthead p{ margin:0; color:var(--ink-soft); font-size:0.82rem; }
 
   /* ================= ROOM ================= */
   .room{
@@ -127,15 +127,17 @@
   .sign:hover, .sign:focus-visible{ transform: rotate(0deg) scale(1.03); }
 
   .mini-sign{
-    position:absolute; top:8.5%; width:7%; aspect-ratio:1; border-radius:50%;
-    background: var(--paper); color: var(--ink-paper);
-    display:flex; align-items:center; justify-content:center;
-    box-shadow: 0 4px 8px -4px var(--shadow); text-decoration:none; z-index:3;
+    position:absolute; left:13%; width:20%; height:3.4%;
+    background: var(--paper); color: var(--ink-paper); border-radius: 999px;
+    display:flex; align-items:center; justify-content:center; gap:1cqw;
+    box-shadow: 0 3px 7px -4px var(--shadow), inset 0 0 0 clamp(1px,0.3cqw,2px) var(--pink-deep);
+    text-decoration:none; z-index:3; font-weight:700;
+    font-size: clamp(8px,1.15cqw,10.5px);
     transition: transform 0.15s ease;
   }
-  .mini-sign svg{ width:55%; height:55%; }
-  .mini-sign.a{ left:14%; } .mini-sign.b{ left:23%; }
-  .mini-sign:hover, .mini-sign:focus-visible{ transform: translateY(-3px) scale(1.06); }
+  .mini-sign svg{ width: clamp(9px,1.4cqw,12px); height: clamp(9px,1.4cqw,12px); flex-shrink:0; }
+  .mini-sign.a{ top:7.3%; } .mini-sign.b{ top:11.6%; }
+  .mini-sign:hover, .mini-sign:focus-visible{ transform: translateY(-2px) scale(1.03); }
 
   /* ---- big nature window (the "back wall" view) ---- */
   .window{
@@ -163,16 +165,11 @@
   .window .tree{ position:absolute; bottom:16%; left:12%; width:12%; }
   .window .tree .trunk{ width:16%; height:34%; background: var(--wood-deep); margin:0 auto; }
   .window .tree .leaves{ width:100%; aspect-ratio:1; border-radius:50%; background: var(--mint-deep); margin-bottom:-6%; }
-  .window .bird{ position:absolute; width:9%; opacity:0.7; }
-  .window .bird::before, .window .bird::after{
-    content:""; position:absolute; top:0; width:60%; height: clamp(1px,0.3cqw,2px); background: var(--ink-soft);
-    border-radius:2px; transform-origin: 0 50%;
-  }
-  .window .bird::before{ transform: rotate(28deg); }
-  .window .bird::after{ left:40%; transform: rotate(-28deg) scaleX(-1); }
-  .window .bird.b1{ top:22%; left:20%; }
-  .window .bird.b2{ top:32%; left:32%; width:7%; }
-  .window .bird.fly{ width:7%; animation: birdFly 13s linear infinite; }
+  .window .bird{ position:absolute; width:11%; opacity:0.85; }
+  .window .bird svg{ width:100%; height:auto; display:block; }
+  .window .bird.b1{ top:20%; left:19%; width:9%; }
+  .window .bird.b2{ top:31%; left:31%; width:7%; }
+  .window .bird.fly{ width:10%; animation: birdFly 13s linear infinite; }
   @keyframes birdFly{
     0%{ left:-10%; top:20%; opacity:0; }
     8%{ opacity:0.75; }
@@ -527,11 +524,13 @@
       <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#EA4335" d="M12 10.2v3.9h5.5c-.24 1.4-1.7 4.1-5.5 4.1-3.3 0-6-2.7-6-6.1s2.7-6.1 6-6.1c1.9 0 3.1.8 3.9 1.5l2.7-2.6C16.9 3.1 14.7 2 12 2 6.9 2 2.7 6.1 2.7 11.2S6.9 20.5 12 20.5c6.9 0 9.6-4.8 9.6-7.3 0-.5-.1-.9-.1-1.2H12z"/></svg>
       <span>Sign in to Google</span>
     </a>
-    <a class="mini-sign a" href="https://app.redroverk12.com/" target="_blank" rel="noopener" aria-label="Sign in to Red Rover" title="Red Rover sign-in">
+    <a class="mini-sign a" href="https://app.redroverk12.com/" target="_blank" rel="noopener">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="8" cy="12" r="4"/><path d="M11.5 12h9M17 12v3M20 12v2"/></svg>
+      <span>Sign in to Red Rover</span>
     </a>
-    <a class="mini-sign b" href="https://ca-sfu.edupoint.com" target="_blank" rel="noopener" aria-label="Sign in to Synergy" title="Synergy sign-in">
+    <a class="mini-sign b" href="https://ca-sfu.edupoint.com" target="_blank" rel="noopener">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="8" cy="12" r="4"/><path d="M11.5 12h9M17 12v3M20 12v2"/></svg>
+      <span>Sign in to Synergy</span>
     </a>
 
     <!-- Big window: the view outside replaces a plain back wall -->
@@ -541,9 +540,9 @@
         <div class="cloud c1"></div>
         <div class="cloud c2"></div>
         <div class="hill back"></div>
-        <div class="bird b1"></div>
-        <div class="bird b2"></div>
-        <div class="bird fly"></div>
+        <div class="bird b1"><svg viewBox="0 0 32 20"><path d="M16 12 Q9 2 2 6 Q10 8 14 13" fill="var(--ink-paper-soft)"/><path d="M16 12 Q23 2 30 6 Q22 8 18 13" fill="var(--ink-paper-soft)"/><ellipse cx="16" cy="12" rx="2.4" ry="2" fill="var(--ink-paper-soft)"/><path d="M16 11 L19.5 10 L19.5 12.4 Z" fill="var(--ink-paper-soft)"/></svg></div>
+        <div class="bird b2"><svg viewBox="0 0 32 20"><path d="M16 12 Q9 2 2 6 Q10 8 14 13" fill="var(--ink-paper-soft)"/><path d="M16 12 Q23 2 30 6 Q22 8 18 13" fill="var(--ink-paper-soft)"/><ellipse cx="16" cy="12" rx="2.4" ry="2" fill="var(--ink-paper-soft)"/><path d="M16 11 L19.5 10 L19.5 12.4 Z" fill="var(--ink-paper-soft)"/></svg></div>
+        <div class="bird fly"><svg viewBox="0 0 32 20"><path d="M16 12 Q9 2 2 6 Q10 8 14 13" fill="var(--ink-paper)"/><path d="M16 12 Q23 2 30 6 Q22 8 18 13" fill="var(--ink-paper)"/><ellipse cx="16" cy="12" rx="2.4" ry="2" fill="var(--ink-paper)"/><path d="M16 11 L19.5 10 L19.5 12.4 Z" fill="var(--ink-paper)"/></svg></div>
         <div class="hill front"></div>
         <div class="tree"><div class="leaves"></div><div class="trunk"></div></div>
       </div>
@@ -589,19 +588,23 @@
       <div class="leg l"></div><div class="leg r"></div>
     </div>
     <a class="panther" href="https://docs.google.com/document/d/1GXfTkQzfRa20akzQ7NM1E-8jx8nxkxmCwVoS9npbge8/edit?tab=t.0" target="_blank" rel="noopener">
-      <svg viewBox="0 0 40 40" aria-hidden="true">
-        <path d="M11 14 L7 4 L16 11 Z" fill="var(--panther-fur)"/>
-        <path d="M29 14 L33 4 L24 11 Z" fill="var(--panther-fur)"/>
+      <svg viewBox="0 0 42 40" aria-hidden="true">
+        <path d="M31 31 Q41 29 39 18 Q38 13 33 14" fill="none" stroke="var(--panther-fur)" stroke-width="4.2" stroke-linecap="round"/>
         <ellipse cx="20" cy="30" rx="13" ry="9" fill="var(--panther-fur)"/>
         <ellipse cx="15" cy="37" rx="3" ry="2" fill="var(--panther-fur)"/>
         <ellipse cx="25" cy="37" rx="3" ry="2" fill="var(--panther-fur)"/>
+        <circle cx="13.5" cy="12.5" r="3.4" fill="var(--panther-fur)"/>
+        <circle cx="26.5" cy="12.5" r="3.4" fill="var(--panther-fur)"/>
         <circle cx="20" cy="20" r="9.5" fill="var(--panther-fur)"/>
-        <ellipse cx="20" cy="24" rx="6" ry="4.2" fill="var(--panther-muzzle)"/>
-        <ellipse class="cub-eye" cx="16.5" cy="19" rx="1.5" ry="1.9" fill="var(--panther-eye)"/>
-        <ellipse class="cub-eye" cx="23.5" cy="19" rx="1.5" ry="1.9" fill="var(--panther-eye)"/>
-        <circle cx="16.7" cy="19.3" r="0.6" fill="var(--panther-fur)"/>
-        <circle cx="23.7" cy="19.3" r="0.6" fill="var(--panther-fur)"/>
-        <path d="M18.7 23.5 L21.3 23.5 L20 25 Z" fill="var(--ink-paper)"/>
+        <circle cx="12.3" cy="21" r="0.7" fill="var(--paper)" opacity="0.75"/>
+        <circle cx="12.3" cy="23.2" r="0.7" fill="var(--paper)" opacity="0.75"/>
+        <circle cx="27.7" cy="21" r="0.7" fill="var(--paper)" opacity="0.75"/>
+        <circle cx="27.7" cy="23.2" r="0.7" fill="var(--paper)" opacity="0.75"/>
+        <ellipse class="cub-eye" cx="16.3" cy="19.5" rx="1.6" ry="2" fill="var(--panther-eye)"/>
+        <ellipse class="cub-eye" cx="23.7" cy="19.5" rx="1.6" ry="2" fill="var(--panther-eye)"/>
+        <circle cx="16.5" cy="19.8" r="0.7" fill="var(--panther-fur)"/>
+        <circle cx="23.9" cy="19.8" r="0.7" fill="var(--panther-fur)"/>
+        <path d="M18.6 23.2 L21.4 23.2 L20 24.7 Z" fill="var(--pink-deep)"/>
       </svg>
       <span class="tag">Panther</span>
     </a>
@@ -645,7 +648,7 @@
     <a class="photos" href="https://photos.google.com/albums" target="_blank" rel="noopener">
       <span class="pic"><i></i></span>
       <span class="pic"><i></i></span>
-      <span class="cap">Weekly Photos</span>
+      <span class="cap">Photos</span>
     </a>
 
     <!-- Desk: Drive + calculator -->
@@ -713,7 +716,7 @@
       <a href="https://sfusd.ilclassroom.com/wikis/28274292-kindergarten?path=Wiki.24888774%2FWiki.28344721" target="_blank" rel="noopener"><span class="dot" style="background:var(--mint)"></span>Imagine Math</a>
       <a href="https://learning.amplify.com/" target="_blank" rel="noopener"><span class="dot" style="background:var(--lav)"></span>Amplify Science</a>
       <a class="tbd" href="https://www.google.com/search?q=kindergarten+social+studies+curriculum+login" target="_blank" rel="noopener"><span class="dot" style="background:var(--butter)"></span>Social Studies</a>
-      <a href="https://photos.google.com/albums" target="_blank" rel="noopener"><span class="dot" style="background:var(--coral)"></span>Weekly Photos</a>
+      <a href="https://photos.google.com/albums" target="_blank" rel="noopener"><span class="dot" style="background:var(--coral)"></span>Photos</a>
       <a href="https://ca-sfu.edupoint.com" target="_blank" rel="noopener"><span class="dot" style="background:var(--mint)"></span>Synergy</a>
       <a href="https://app.redroverk12.com/" target="_blank" rel="noopener"><span class="dot" style="background:var(--lav)"></span>Red Rover</a>
       <a href="https://docs.google.com/spreadsheets/d/1vmJ4RaHc4bUthfQsTiNXKXSnMi0M6C8uu2kt6Naxz4g/edit?gid=1244768649#gid=1244768649" target="_blank" rel="noopener"><span class="dot" style="background:var(--butter)"></span>Work Order Request Form</a>
