@@ -104,40 +104,22 @@
   .bunting span:nth-child(4n+3){ background: var(--butter); }
   .bunting span:nth-child(4n+4){ background: var(--lav); }
 
-  /* hanging welcome sign */
-  .sign{
-    position:absolute; top:7%; left:33%; width:34%; height:8%;
-    background: var(--paper);
-    border-radius: 999px;
+  /* sign-in row: Google, Red Rover, Synergy — one consistent unrotated row */
+  .signrow{
+    position:absolute; top:7%; left:13%; width:63%; height:8%;
+    display:flex; gap:2%; z-index:3;
+  }
+  .signrow a{
+    flex:1; display:flex; align-items:center; justify-content:center; gap:1.2cqw;
+    background: var(--paper); border-radius:999px;
     box-shadow: 0 6px 14px -8px var(--shadow), inset 0 0 0 clamp(1px,0.4cqw,3px) var(--pink-deep);
-    display:flex; align-items:center; justify-content:center; gap:1.4cqw;
-    text-decoration:none; color: var(--ink-paper);
-    transform: rotate(-1deg);
-    transition: transform 0.15s ease;
-    z-index:3;
-  }
-  .sign::before, .sign::after{
-    content:""; position:absolute; top:-7%; width: clamp(1px,0.3cqw,2px); height:7%;
-    background: var(--wood-edge);
-  }
-  .sign::before{ left:20%; }
-  .sign::after{ right:20%; }
-  .sign svg{ width: clamp(14px,2.2cqw,19px); height: clamp(14px,2.2cqw,19px); flex-shrink:0; }
-  .sign span{ font-weight:700; font-size: clamp(14px,2.2cqw,19px); }
-  .sign:hover, .sign:focus-visible{ transform: rotate(0deg) scale(1.03); }
-
-  .mini-sign{
-    position:absolute; left:13%; width:20%; height:3.4%;
-    background: var(--paper); color: var(--ink-paper); border-radius: 999px;
-    display:flex; align-items:center; justify-content:center; gap:1cqw;
-    box-shadow: 0 3px 7px -4px var(--shadow), inset 0 0 0 clamp(1px,0.3cqw,2px) var(--pink-deep);
-    text-decoration:none; z-index:3; font-weight:700;
-    font-size: clamp(8px,1.15cqw,10.5px);
+    text-decoration:none; color: var(--ink-paper); font-weight:700;
+    font-size: clamp(11px,1.6cqw,15px);
     transition: transform 0.15s ease;
   }
-  .mini-sign svg{ width: clamp(9px,1.4cqw,12px); height: clamp(9px,1.4cqw,12px); flex-shrink:0; }
-  .mini-sign.a{ top:7.3%; } .mini-sign.b{ top:11.6%; }
-  .mini-sign:hover, .mini-sign:focus-visible{ transform: translateY(-2px) scale(1.03); }
+  .signrow a svg{ width: clamp(14px,2cqw,18px); height: clamp(14px,2cqw,18px); flex-shrink:0; }
+  .signrow a.primary{ flex:1.3; }
+  .signrow a:hover, .signrow a:focus-visible{ transform: translateY(-3px); }
 
   /* ---- big nature window (the "back wall" view) ---- */
   .window{
@@ -364,6 +346,7 @@
   .photos .cap{
     position:absolute; left:0; bottom:0; font-size: clamp(13px,2.1cqw,18px); font-weight:700;
     background: var(--paper); padding: 3px 8px; border-radius:6px; box-shadow: 0 2px 4px -2px var(--shadow);
+    z-index:3;
   }
   .photos:hover .pic, .photos:focus-visible .pic{ transform: rotate(0deg); }
 
@@ -431,7 +414,7 @@
   footer{ font-size:0.78rem; color:var(--ink-soft); text-align:center; }
 
   @media (prefers-reduced-motion: reduce){
-    .sign, .book, .calendar, .note, .photos .pic, .calc-launch, .teacup svg, .drive-vase, .sconce, .mini-sign, .panther{ transition:none !important; }
+    .signrow a, .book, .calendar, .note, .photos .pic, .calc-launch, .teacup svg, .drive-vase, .sconce, .panther{ transition:none !important; }
     .note-heart, .cub-eye, .steam, .window .bird.fly{ animation:none !important; left:40%; top:16%; opacity:0.7; }
   }
   a:focus-visible, button:focus-visible{ outline: 3px solid var(--ring); outline-offset:2px; }
@@ -452,7 +435,7 @@
 
   /* ---- baby panther, curled up on the armchair — also the Panther Powers link ---- */
   .panther{
-    position:absolute; left:29%; top:70%; width:15%;
+    position:absolute; left:26%; top:74%; width:19%;
     display:flex; flex-direction:column; align-items:center; gap:4%;
     text-decoration:none; z-index:3; transition: transform 0.15s ease;
   }
@@ -520,18 +503,20 @@
       <span><svg viewBox="0 0 20 20"><ellipse cx="10" cy="14" rx="4.5" ry="3.6" fill="var(--paper)"/><circle cx="5" cy="8" r="1.8" fill="var(--paper)"/><circle cx="9" cy="5.5" r="1.9" fill="var(--paper)"/><circle cx="13" cy="5.5" r="1.9" fill="var(--paper)"/><circle cx="15.5" cy="9" r="1.8" fill="var(--paper)"/></svg></span>
     </div>
 
-    <a class="sign" href="https://accounts.google.com/" target="_blank" rel="noopener">
-      <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#EA4335" d="M12 10.2v3.9h5.5c-.24 1.4-1.7 4.1-5.5 4.1-3.3 0-6-2.7-6-6.1s2.7-6.1 6-6.1c1.9 0 3.1.8 3.9 1.5l2.7-2.6C16.9 3.1 14.7 2 12 2 6.9 2 2.7 6.1 2.7 11.2S6.9 20.5 12 20.5c6.9 0 9.6-4.8 9.6-7.3 0-.5-.1-.9-.1-1.2H12z"/></svg>
-      <span>Sign in to Google</span>
-    </a>
-    <a class="mini-sign a" href="https://app.redroverk12.com/" target="_blank" rel="noopener">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="8" cy="12" r="4"/><path d="M11.5 12h9M17 12v3M20 12v2"/></svg>
-      <span>Sign in to Red Rover</span>
-    </a>
-    <a class="mini-sign b" href="https://ca-sfu.edupoint.com" target="_blank" rel="noopener">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="8" cy="12" r="4"/><path d="M11.5 12h9M17 12v3M20 12v2"/></svg>
-      <span>Sign in to Synergy</span>
-    </a>
+    <div class="signrow">
+      <a class="primary" href="https://accounts.google.com/" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#EA4335" d="M12 10.2v3.9h5.5c-.24 1.4-1.7 4.1-5.5 4.1-3.3 0-6-2.7-6-6.1s2.7-6.1 6-6.1c1.9 0 3.1.8 3.9 1.5l2.7-2.6C16.9 3.1 14.7 2 12 2 6.9 2 2.7 6.1 2.7 11.2S6.9 20.5 12 20.5c6.9 0 9.6-4.8 9.6-7.3 0-.5-.1-.9-.1-1.2H12z"/></svg>
+        <span>Google</span>
+      </a>
+      <a href="https://app.redroverk12.com/" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="8" cy="12" r="4"/><path d="M11.5 12h9M17 12v3M20 12v2"/></svg>
+        <span>Red Rover</span>
+      </a>
+      <a href="https://ca-sfu.edupoint.com" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="8" cy="12" r="4"/><path d="M11.5 12h9M17 12v3M20 12v2"/></svg>
+        <span>Synergy</span>
+      </a>
+    </div>
 
     <!-- Big window: the view outside replaces a plain back wall -->
     <div class="window" aria-hidden="true">
@@ -588,23 +573,23 @@
       <div class="leg l"></div><div class="leg r"></div>
     </div>
     <a class="panther" href="https://docs.google.com/document/d/1GXfTkQzfRa20akzQ7NM1E-8jx8nxkxmCwVoS9npbge8/edit?tab=t.0" target="_blank" rel="noopener">
-      <svg viewBox="0 0 42 40" aria-hidden="true">
-        <path d="M31 31 Q41 29 39 18 Q38 13 33 14" fill="none" stroke="var(--panther-fur)" stroke-width="4.2" stroke-linecap="round"/>
-        <ellipse cx="20" cy="30" rx="13" ry="9" fill="var(--panther-fur)"/>
-        <ellipse cx="15" cy="37" rx="3" ry="2" fill="var(--panther-fur)"/>
-        <ellipse cx="25" cy="37" rx="3" ry="2" fill="var(--panther-fur)"/>
-        <circle cx="13.5" cy="12.5" r="3.4" fill="var(--panther-fur)"/>
-        <circle cx="26.5" cy="12.5" r="3.4" fill="var(--panther-fur)"/>
-        <circle cx="20" cy="20" r="9.5" fill="var(--panther-fur)"/>
-        <circle cx="12.3" cy="21" r="0.7" fill="var(--paper)" opacity="0.75"/>
-        <circle cx="12.3" cy="23.2" r="0.7" fill="var(--paper)" opacity="0.75"/>
-        <circle cx="27.7" cy="21" r="0.7" fill="var(--paper)" opacity="0.75"/>
-        <circle cx="27.7" cy="23.2" r="0.7" fill="var(--paper)" opacity="0.75"/>
-        <ellipse class="cub-eye" cx="16.3" cy="19.5" rx="1.6" ry="2" fill="var(--panther-eye)"/>
-        <ellipse class="cub-eye" cx="23.7" cy="19.5" rx="1.6" ry="2" fill="var(--panther-eye)"/>
-        <circle cx="16.5" cy="19.8" r="0.7" fill="var(--panther-fur)"/>
-        <circle cx="23.9" cy="19.8" r="0.7" fill="var(--panther-fur)"/>
-        <path d="M18.6 23.2 L21.4 23.2 L20 24.7 Z" fill="var(--pink-deep)"/>
+      <svg viewBox="0 0 46 34" aria-hidden="true">
+        <path d="M32 27 Q44 24 42 12 Q41 6 34 7" fill="none" stroke="var(--panther-fur)" stroke-width="5" stroke-linecap="round"/>
+        <ellipse cx="19" cy="24" rx="15" ry="8.5" fill="var(--panther-fur)"/>
+        <ellipse cx="13" cy="32" rx="3.4" ry="2.2" fill="var(--panther-fur)"/>
+        <ellipse cx="20" cy="32" rx="3.4" ry="2.2" fill="var(--panther-fur)"/>
+        <path d="M10 8 L7 1.5 L15 6.5 Z" fill="var(--panther-fur)"/>
+        <path d="M24 6.5 L27 0.5 L30 7.5 Z" fill="var(--panther-fur)"/>
+        <ellipse cx="18" cy="13" rx="9.5" ry="8.8" fill="var(--panther-fur)"/>
+        <circle cx="9.3" cy="14.5" r="0.7" fill="var(--paper)" opacity="0.7"/>
+        <circle cx="9.3" cy="16.5" r="0.7" fill="var(--paper)" opacity="0.7"/>
+        <circle cx="26.7" cy="14.5" r="0.7" fill="var(--paper)" opacity="0.7"/>
+        <circle cx="26.7" cy="16.5" r="0.7" fill="var(--paper)" opacity="0.7"/>
+        <ellipse class="cub-eye" cx="13.5" cy="13" rx="2" ry="1.4" fill="var(--panther-eye)" transform="rotate(-12 13.5 13)"/>
+        <ellipse class="cub-eye" cx="22.5" cy="13" rx="2" ry="1.4" fill="var(--panther-eye)" transform="rotate(12 22.5 13)"/>
+        <rect x="13.15" y="11.7" width="0.7" height="2.6" rx="0.35" fill="var(--panther-fur)" transform="rotate(-12 13.5 13)"/>
+        <rect x="22.15" y="11.7" width="0.7" height="2.6" rx="0.35" fill="var(--panther-fur)" transform="rotate(12 22.5 13)"/>
+        <path d="M16.5 17.5 L19.5 17.5 L18 19 Z" fill="var(--pink-deep)"/>
       </svg>
       <span class="tag">Panther</span>
     </a>
